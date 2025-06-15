@@ -2,44 +2,44 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
 
 export default function CartItem({ item }) {
-  const { id, name, totalPrice, quantity, price } = item;
   const dispatch = useDispatch();
 
-  function handleAdd() {
-    dispatch(cartActions.addToCart({ id, price, name }));
+  function handleAdd(item) {
+    dispatch(cartActions.addToCart(item));
   }
 
-  function handleSubtract() {
-    dispatch(cartActions.removeItem(id));
+  function handleSubtract(id) {
+    dispatch(cartActions.removeFromCart(id));
   }
 
   return (
     <li className="border border-black/20 p-4 rounded-lg">
-      <header className="w-full flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <h3 className="tracking-tighter text-xl">{name}</h3>
-          <h3 className="tracking-tighter text-xl">x</h3>
-          <h3 className="tracking-tighter text-xl">{quantity}</h3>
-        </div>
-        <div>
-          ${totalPrice.toFixed(2)} <span>(${price.toFixed(2)}/item)</span>
-        </div>
-        <div className="flex gap-2">
+      <div className="w-full grid grid-cols-3">
+        <h1 className="text-xl tracking-tight text-black flex items-end gap-2">
+          <span>{item.name}</span> -
+          <span className="text-lg">${item.price.toFixed(2)}</span>
+        </h1>
+        <div className="flex items-center justify-center gap-2">
           <button
-            onClick={handleSubtract}
-            className="size-6 flex items-center justify-center rounded-full bg-black text-white text-lg cursor-pointer hover:bg-red-500"
+            onClick={() => handleSubtract(item.id)}
+            className="size-6 flex items-center justify-center cursor-pointer bg-black text-white rounded-full"
           >
             -
           </button>
-          <p>{quantity}</p>
+          <h1 className="text-lg tracking-tight text-black text-center font-mono">
+            {item.quantity}
+          </h1>
           <button
-            onClick={handleAdd}
-            className="size-6 flex items-center justify-center rounded-full bg-black text-white text-lg cursor-pointer hover:bg-green-500"
+            onClick={() => handleAdd(item)}
+            className="size-6 flex items-center justify-center cursor-pointer bg-black text-white rounded-full"
           >
             +
           </button>
         </div>
-      </header>
+        <p className="text-lg tracking-tight text-black text-end">
+          ${item.totalPrice.toFixed(2)}
+        </p>
+      </div>
     </li>
   );
 }

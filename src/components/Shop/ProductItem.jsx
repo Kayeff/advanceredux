@@ -23,7 +23,7 @@ export default function ProductItem({ prod }) {
         <div className="w-full flex items-center justify-end">
           <button
             onClick={() => handleAddToCart()}
-            className="rounded-lg p-2 px-4 bg-black text-white cursor-pointer"
+            className="rounded-lg p-2 px-4 bg-black text-white cursor-pointer active:scale-105 duration-300"
           >
             Add to Cart
           </button>

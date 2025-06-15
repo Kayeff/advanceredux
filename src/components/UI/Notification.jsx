@@ -9,7 +9,7 @@ export default function Notification({ notification }) {
         "absolute flex items-center justify-between text-white p-1.5 px-10 top-0 left-1/2 -translate-x-1/2 w-full",
         status === "pending" && "bg-indigo-500",
         status === "success" && "bg-black",
-        status === "error" && "bg-red-500"
+        status === "failure" && "bg-red-500"
       )}
     >
       <h2 className="text-sm tracking-tight">{title}</h2>

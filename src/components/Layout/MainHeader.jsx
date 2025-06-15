@@ -3,9 +3,9 @@ import CartButton from "../Cart/CartButton";
 import { uiActions } from "../../store/ui";
 
 export default function MainHeader() {
+  const showCart = useSelector((state) => state.ui.showCart);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
-  const isCartVisible = useSelector((state) => state.ui.showCart);
-  const quantity = useSelector((state) => state.cart.totalQuantity);
 
   function handleClick() {
     dispatch(uiActions.toggleCart());
@@ -17,8 +17,8 @@ export default function MainHeader() {
       <nav>
         <ul>
           <li>
-            <CartButton handleClick={handleClick} quantity={quantity}>
-              {isCartVisible ? "Hide" : "Show"} Cart
+            <CartButton handleClick={handleClick} quantity={totalQuantity}>
+              {showCart ? "Hide" : "Show"} Cart
             </CartButton>
           </li>
         </ul>
